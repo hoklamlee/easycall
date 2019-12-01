@@ -54,8 +54,14 @@ class LoginPage extends React.Component {
         const { loggingIn, error } = this.props;
         const { username, password, submitted } = this.state;
         return (
-            <div style={{ height: '100vh', width: '100%' }}>
+            <div style={{ height: '200vh', width: '100%' }}>
                 <Grid container direction="column" alignContent="center">
+                    <Grid item>
+                        <div style={{ height: '100vh', backgroundColor:'deepskyblue' }}>
+                            <h4>High-Privacy Real time notification</h4>
+                            
+                        </div>
+                    </Grid>
                     <Grid item lg={12} md={12} sm={12} xs={12}>
                         <TextOnImage
                             position="bottom"
@@ -92,7 +98,7 @@ class LoginPage extends React.Component {
                                 </div>
                                 <div style={{ fontSize: "2vh" }}>
                                     <div style={{ display: "inline", color: "grey" }}>Don’t have a QR sticker?</div>
-                                    <a style={{ display: "inline" }} onClick={()=>this.goToRegisterPage()}> Request now</a>
+                                    <a style={{ display: "inline" }} onClick={() => this.goToRegisterPage()}> Request now</a>
                                 </div>
                             </form>
                         </div>

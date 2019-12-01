@@ -11,7 +11,7 @@ import FolderIcon from '@material-ui/icons/Folder';
 import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import { Home, NoteAdd, Sms, Notifications, EventNote } from '@material-ui/icons';
+import { Home, NoteAdd, Sms, Notifications, EventNote, Person } from '@material-ui/icons';
 
 
 const useStyles = makeStyles({
@@ -45,12 +45,10 @@ class MUIBottomNavigation extends React.Component {
         return (
             loggedIn || localStorage.getItem('user') ?
 
-            <BottomNavigation value={this.state.value} onChange={(e,v)=>this.handleChange(e,v)} style={{ width: '100%' }}>
-                <BottomNavigationAction label="Home" value="Home" icon={<Home />} />
-                <BottomNavigationAction label="Apply" value="Apply" icon={<NoteAdd />} />
-                <BottomNavigationAction label="SMS" value="SMS" icon={<Sms />} />
-                <BottomNavigationAction label="Notifications" value="Notifications" icon={<Notifications />} />
-                <BottomNavigationAction label="Log" value="Log" icon={<EventNote />} />
+                <BottomNavigation value={this.state.value} onChange={(e, v) => this.handleChange(e, v)} style={{ width: '100%' }}>
+                    <BottomNavigationAction label="Home" value="Home" icon={<Home />} />
+                    <BottomNavigationAction label="Notifications" value="Notifications" icon={<Notifications />} />
+                    <BottomNavigationAction label="Profile" value="Person" icon={<Person />} />
                 </BottomNavigation> :
                 ""
         );

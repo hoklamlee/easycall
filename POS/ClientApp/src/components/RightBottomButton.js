@@ -33,7 +33,7 @@ export default function RightBottomButton(props) {
 
 
     return (
-        <Fab aria-label={props.label} className={classes.fab} color='primary' onClick={handleClick}>
+        <Fab style={props.style} aria-label={props.label} className={classes.fab} color='primary' onClick={handleClick}>
             {props.children}
         </Fab>
     );

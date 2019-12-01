@@ -1,5 +1,6 @@
 ﻿import config from 'react-global-configuration';
 
+
 config.set({
     foo: 'bar',
     bar: {

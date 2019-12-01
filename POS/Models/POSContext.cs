@@ -25,6 +25,11 @@ namespace POS.Models
         public DbSet<Status> Statuses { get; set; }
 
 
+        public DbSet<NotificationItem> NotificationItems { get; set; }
+
+        public DbSet<NotificationItemMethod> NotificationItemMethods { get; set; }
+
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,6 +47,19 @@ namespace POS.Models
             modelBuilder.Entity<FavouriteOrder>().HasOne(o => o.User).WithMany(o => o.FavouriteOrders).HasForeignKey(o => o.UserId);
 
             modelBuilder.Entity<Purchaser>().HasMany(o => o.Orders).WithOne(o => o.Purchaser).HasForeignKey(o => o.PurchaserId);
+
+
+
+
+
+            modelBuilder.Entity<NotificationItem>().HasMany(o => o.Messages).WithOne(o=>o.NotificationItem).HasForeignKey(o=>o.NotificationItemId);
+            modelBuilder.Entity<NotificationItem>().HasMany(o => o.NotificationItemMethods).WithOne(o=>o.NotificationItem).HasForeignKey(o=>o.NotificationItemId);
+
+
+
+            modelBuilder.Entity<MethodType>().HasData( new MethodType() { MethodTypeId = 1, Method = "SMS"});
+            modelBuilder.Entity<MethodType>().HasData(new MethodType() { MethodTypeId = 2, Method = "Whatsapp" });
+            modelBuilder.Entity<MethodType>().HasData(new MethodType() { MethodTypeId = 3, Method = "Phone" });
 
             //modelBuilder.Entity<Order>().HasOne(o => o.DeliverBy).WithMany(o=>o.DeliverOrders).HasForeignKey(o => o.DeliverById); ;
 
