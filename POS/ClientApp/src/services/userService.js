@@ -15,23 +15,40 @@ export const userService = {
 };
 
 function login(username, password) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    };
+    //const requestOptions = {
+    //    method: 'POST',
+    //    headers: { 'Content-Type': 'application/json' },
+    //    body: JSON.stringify({ username, password })
+    //};
 
-    var api = config.get('apiUrl');
+    //var api = config.get('apiUrl');
 
 
-    return fetch(`${api}/users/authenticate`, requestOptions)
-        .then(handleResponse)
-        .then(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user));
+    //return fetch(`${api}/users/authenticate`, requestOptions)
+    //    .then(handleResponse)
+    //    .then(user => {
+    //        // store user details and jwt token in local storage to keep user logged in between page refreshes
+    //        localStorage.setItem('user', JSON.stringify(user));
 
-            return user;
-        });
+    //        return user;
+    //    });
+
+    var fakeContent = {
+        active: true,
+        displayName: "Hanson Lee",
+        email: "hoklamlee2005@gmail.com",
+        favouriteOrders: null,
+        firstName: "Hok Lam",
+        lastName: "Leeee",
+        password: null,
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NzUxMDkzNTMsImV4cCI6MTU3NTcxNDE1MywiaWF0IjoxNTc1MTA5MzUzfQ.Z7QNh5Azb31iZmuPKG8vtNo2262D3CxzxJAduTrFnAw",
+        tokenCreatedDate: null,
+        userId: 1,
+        username: "hansonlee",
+
+    }
+
+    return new Promise(resolve => resolve(fakeContent));
 }
 
 function updateUserInfo(userId, firstName, lastName, email, username) {

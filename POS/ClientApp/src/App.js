@@ -12,6 +12,7 @@ import Home from './containers/Home';
 import Counter from './components/Counter';
 import FetchData from './components/FetchData';
 import { LoginPage } from './containers/LoginPage';
+import { RegisterPage } from './containers/RegisterPage';
 import { ProfilePage } from './containers/ProfilePage/ProfilePage';
 import { ProfileDrawer } from './containers/ProfilePage/ProfileDrawer';
 
@@ -85,8 +86,10 @@ class App extends React.Component {
 
                 <Router history={history}>
                     <Layout>
-                        <PrivateRoute exact path="/" component={Home} />
+                        {/*<PrivateRoute exact path="/" component={Home} />*/}
+                        <Route exact path="/" component={Home} />
                         <Route path="/login" component={LoginPage} />
+                        <Route path="/register" component={RegisterPage} />
                         <PrivateRoute path='/counter' component={Counter} />
 
                         <PrivateRoute path='/order' component={OrderTab} />

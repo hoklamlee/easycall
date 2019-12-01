@@ -1,0 +1,20 @@
+﻿.image {
+    position: relative;
+    width: 100%; /* for IE 6 */
+}
+
+.top {
+    position: absolute;
+    top: calc(100% - 90%);
+    left: 0;
+    width: 100%;
+    padding: 10px;
+}
+
+.bottom {
+    position: absolute;
+    top: calc(100% - 20vh);
+    left: 0;
+    width: 100%;
+    padding: 10px;
+}
