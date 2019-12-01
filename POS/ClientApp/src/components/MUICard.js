@@ -10,42 +10,45 @@ import Typography from '@material-ui/core/Typography';
 import CarImage from '../assets/list-page-audi-car@2x.png';
 
 const useStyles = makeStyles({
-  card: {
-    maxWidth: 345,
-  },
+    card: {
+        maxWidth: 345,
+    },
 });
 
-export default function MUICard() {
-  const classes = useStyles();
+export default function MUICard(props) {
+    const classes = useStyles();
 
-  return (
-    <Card className={classes.card}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          height="140"
-                  image={CarImage}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Where is my car?
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
-    </Card>
-  );
+    return (<div>
+        {props.cards.map(o => (
+            <Card className={classes.card} onClick={o.onClick}>
+                <CardActionArea>
+                    <CardMedia
+                        component="img"
+                        alt="Contemplative Reptile"
+                        height="140"
+                        image={CarImage}
+                        title="Contemplative Reptile"
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {o.title}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {o.content}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+                <CardActions>
+                    <Button size="small" color="primary">
+                        Share
+                        </Button>
+                    <Button size="small" color="primary">
+                        Learn More
+                        </Button>
+                </CardActions>
+            </Card>
+        ))}
+    </div>
+
+    );
 }

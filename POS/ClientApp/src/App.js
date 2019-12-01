@@ -16,6 +16,12 @@ import { RegisterPage } from './containers/RegisterPage';
 import { ProfilePage } from './containers/ProfilePage/ProfilePage';
 import { ProfileDrawer } from './containers/ProfilePage/ProfileDrawer';
 
+import { NotificationItemPage } from './containers/NotificationItemPage/NotificationItemPage';
+import { CreateNotificationItemPage } from './containers/NotificationItemPage/CreateNotificationItemPage';
+import { EditNotificationItemPage } from './containers/NotificationItemPage/EditNotificationItemPage';
+
+import { NotificationPage } from './containers/NotificationPage/NotificationPage';
+
 import { OrderTab } from './containers/OrderPage/OrderTab';
 //import { OrderPage } from './containers/OrderPage/OrderPage';
 import { AddOrderPage } from './containers/OrderPage/AddOrderPage';
@@ -92,6 +98,10 @@ class App extends React.Component {
                         <Route path="/register" component={RegisterPage} />
                         <PrivateRoute path='/counter' component={Counter} />
 
+                        <PrivateRoute path='/createnotificationitem' component={CreateNotificationItemPage} />
+                        <PrivateRoute path='/editnotificationitem/:id' component={EditNotificationItemPage} />
+
+                        <PrivateRoute path='/notification' component={NotificationPage} />
 
                         <PrivateRoute path='/profile' component={ProfileDrawer} />
                         <PrivateRoute path='/fetch-data/:startDateIndex?' component={FetchData} />
