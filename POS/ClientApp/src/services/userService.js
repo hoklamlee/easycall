@@ -48,6 +48,8 @@ function login(username, password) {
 
     }
 
+    localStorage.setItem('user', JSON.stringify(fakeContent));
+
     return new Promise(resolve => resolve(fakeContent));
 }
 

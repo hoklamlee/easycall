@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { actionCreators } from '../store/User';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import MUIBottomNavigation from '../components/MUIBottomNavigation';
 import { faCoffee, faPlus, faTrash, faPen, faTools, faInfo, faKey, faSignOutAlt,faCog, faUser, faStore,  faDrumstickBite, faList, faHome} from '@fortawesome/free-solid-svg-icons'
 import config from 'react-global-configuration';
 
@@ -13,6 +14,7 @@ import './NavMenu.css';
 const navbar_background_color = config.get('navbar_background_color');
 const navbar_font_color = config.get('navbar_font_color');
 const isFullWidth = config.get('isFullWidth');
+const brandName = config.get('brandName');
 
 const fontStyle = {
     color: navbar_font_color
@@ -40,14 +42,15 @@ class NavMenu extends React.Component {
     render() {
         const { loggedIn } = this.props;
 
+        const isMobile = true;
 
         return (
             loggedIn || localStorage.getItem('user') ?
                 <header>
                     {/*<Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light style={{ backgroundColor: navbar_background_color}}>*/}
-                    <Navbar className="navbar-dark navbar-expand-sm navbar-toggleable-sm box-shadow"  color="dark" style={{ backgroundColor: navbar_background_color }}>
+                    <Navbar className="navbar-dark navbar-expand-sm navbar-toggleable-sm box-shadow"  style={{ backgroundColor: navbar_background_color }}>
                         <Container fluid={isFullWidth}>
-                            <NavbarBrand style={fontStyle} tag={Link} to="/">POS</NavbarBrand>
+                            <NavbarBrand style={fontStyle} tag={Link} to="/">{brandName}</NavbarBrand>
                             <NavbarToggler style={fontStyle}  onClick={this.toggle} className="mr-2" />
                             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
                                 <ul className="navbar-nav flex-grow">
@@ -64,17 +67,7 @@ class NavMenu extends React.Component {
                                     */ }
 
 
-                                    <NavItem>
-                                        <NavLink tag={Link} style={fontStyle} to="/order"><FontAwesomeIcon icon={faList} /> Order</NavLink>
-                                    </NavItem>
-
-                                    <NavItem>
-                                        <NavLink tag={Link} style={fontStyle} to="/purchaser"><FontAwesomeIcon icon={faStore} /> Purchaser</NavLink>
-                                    </NavItem>
-
-                                    <NavItem>
-                                        <NavLink tag={Link} style={fontStyle} to="/inventory"><FontAwesomeIcon icon={faDrumstickBite} /> Inventory</NavLink>
-                                    </NavItem>
+           
 
                                     <NavItem>
                                         <NavLink tag={Link} style={fontStyle} to="/profile"><FontAwesomeIcon icon={faUser} /> {this.props.user.username}</NavLink>
@@ -87,7 +80,7 @@ class NavMenu extends React.Component {
                             </Collapse>
                         </Container>
                     </Navbar>
-                </header>
+                    </header>
                 :
                 ""
 

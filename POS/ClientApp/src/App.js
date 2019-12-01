@@ -87,27 +87,11 @@ class App extends React.Component {
                 <Router history={history}>
                     <Layout>
                         {/*<PrivateRoute exact path="/" component={Home} />*/}
-                        <Route exact path="/" component={Home} />
+                        <PrivateRoute exact path="/" component={Home} />
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
                         <PrivateRoute path='/counter' component={Counter} />
 
-                        <PrivateRoute path='/order' component={OrderTab} />
-                        <PrivateRoute path='/createorder' component={AddOrderPage} />
-                        <PrivateRoute path='/editorder/:id' component={EditOrderPage} />
-                        <PrivateRoute path='/printorder/:id' component={ReceiptPage} />
-
-                        <PrivateRoute path='/orderitem' component={OrderItemPage} />
-                        <PrivateRoute path='/createorderitem/:id' component={AddOrderItemPage} />
-                        <PrivateRoute path='/editorderitem/:id' component={EditOrderItemPage} />
-
-                        <PrivateRoute path='/inventory' component={InventoryTab} />
-                        <PrivateRoute path='/createinventory' component={AddInventoryPage} />
-                        <PrivateRoute path='/editinventory/:id' component={EditInventoryPage} />
-
-                        <PrivateRoute path='/purchaser' component={PurchaserTab} />
-                        <PrivateRoute path='/createpurchaser' component={AddPurchaserPage} />
-                        <PrivateRoute path='/editpurchaser/:id' component={EditPurchaserPage} />
 
                         <PrivateRoute path='/profile' component={ProfileDrawer} />
                         <PrivateRoute path='/fetch-data/:startDateIndex?' component={FetchData} />
