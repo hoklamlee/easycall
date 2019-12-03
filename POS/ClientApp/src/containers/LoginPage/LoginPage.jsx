@@ -11,7 +11,10 @@ import { Grid, Typography } from '@material-ui/core';
 import ReactStrappForm from '../../components/ReactStrapForm';
 import { width } from '@material-ui/system';
 import TextOnImage from '../../components/TextOnImage';
-
+import imageBackground from '../../assets/bg-frontpage.png';
+import imageMan from '../../assets/bg-man.png';
+import imageCar from '../../assets/bg-car.png';
+import './style.css';
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
@@ -56,10 +59,14 @@ class LoginPage extends React.Component {
         return (
             <div style={{ height: '200vh', width: '100%' }}>
                 <Grid container width="100vh" direction="column">
-                    <Grid item style={{width:'100%', height: '100vh', backgroundColor: 'deepskyblue' }}>
+                    <Grid item style={{width:'100%', height: '100vh', backgroundColor: '#f3effd' }}>
                             <div>
                                 <h4>High-Privacy Real time notification</h4>
+                                <img src={imageBackground} alt="Smiley face" style={{width:'100%'}}/>
+                                <img src={imageMan} alt="Smiley face" className="imageMan" />
+                                <img src={imageCar} alt="Smiley face"  className="imageCar" />
                             </div>
+
                     </Grid>
                     <Grid item alignContent='center'>
                         <Grid container direction="column" alignContent="center">

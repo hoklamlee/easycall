@@ -1,0 +1,14 @@
+.imageMan{
+    position: absolute;
+    left: 25%;
+    top: 15%;
+    height: 10%;
+    width: auto;
+}
+.imageCar{
+    position: absolute;
+    right: -5vh;
+    width: 30vh;
+    height: auto;
+    top: 27vh;
+}
