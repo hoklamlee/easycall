@@ -1,8 +1,8 @@
 .imageMan{
     position: absolute;
-    left: 25%;
-    top: 15%;
-    height: 10%;
+    left: 22%;
+    top: 18%;
+    height: 20vh;
     width: auto;
 }
 .imageCar{
@@ -10,5 +10,5 @@
     right: -5vh;
     width: 30vh;
     height: auto;
-    top: 27vh;
+    top: 16%;
 }
