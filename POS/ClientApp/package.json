@@ -14,7 +14,7 @@
     "@material-ui/pickers": "^3.2.7",
     "antd": "^3.24.3",
     "bootstrap": "^4.3.1",
-    "jquery": "3.3.1",
+    "jquery": "3.4.0",
     "material-table": "^1.53.0",
     "nuka-carousel": "^4.5.13",
     "react": "^16.11.0",
