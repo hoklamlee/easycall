@@ -17,13 +17,20 @@ import imageCar from '../../assets/bg-car.png';
 import imageReporter from '../../assets/bg-man-reporter.png';
 import './style.css';
 import Tabs from '../../components/Tabs'
-import Carousel from 'nuka-carousel';
+
+import Button from '@material-ui/core/Button';
+import {makeStyles} from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
+
+import NavigationIcon from '@material-ui/icons/Navigation';
+import Icon from '@material-ui/core/Icon';
 
 const colors = ['7732bb', '047cc0', '00884b', 'e3bc13', 'db7c00', 'aa231f'];
 
 class LoginPage extends React.Component {
 
     constructor(props) {
+
         super(...props);
         this.state = {
             slideIndex: 0,
@@ -118,17 +125,18 @@ class LoginPage extends React.Component {
                                 height: '20vh',
                                 width: 'auto',
                                 position: 'relative',
-                                top: '-30%',
-                                left: '100%',
+                                padding: '10px'
+                                // top: '-30%',
+                                // left: '100%',
                             }}/>
                         </Grid>
                         <Grid item xs={4}>
                             <img src={imageCar} style={{
-                                height: '16vh',
+                                height: '13vh',
                                 width: 'auto',
-                                position: 'absolute',
+                                // position: 'absolute',
                                 right: '0%',
-                                top: '20%',
+                                // top: '20%',
                             }}/>
 
                         </Grid>
@@ -136,19 +144,33 @@ class LoginPage extends React.Component {
                             <img src={imageReporter} style={{
                                 height: '15vh',
                                 width: 'auto',
-                                position: 'absolute',
-                                top: '20%',
-                                right: '8%',
+                                // position: 'absolute',
+                                // top: '20%',
+                                // right: '8%',
                             }}/>
                         </Grid>
                     </Grid>
                     <Grid container>
 
-                        <Grid item xs={12} style={{}}>
-                            <Tabs style={{}}></Tabs>
+                        <Grid item xs={12}>
+                            <Tabs>
+                                {/* show repoter / car's owner data*/}
+                            </Tabs>
                         </Grid>
                     </Grid>
                 </Grid>
+
+                <Grid container justify="center" alignItems="flex-start">
+                    <Button
+                        size="large"
+                        variant="contained"
+                        color="primary"
+                        startIcon={<Icon className="arrow_front">send</Icon>}
+                    >
+                        Request it
+                    </Button>
+                </Grid>
+
 
                 <Grid container width="100vh" direction="column">
                     <Grid item alignContent='center'>
