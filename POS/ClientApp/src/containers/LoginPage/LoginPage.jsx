@@ -1,15 +1,15 @@
 ﻿import React from 'react';
-import {Router, Route, Link} from 'react-router';
+import { Router, Route, Link } from 'react-router';
 
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import {actionCreators} from '../../store/User';
+import { actionCreators } from '../../store/User';
 import config from 'react-global-configuration';
 import logo from '../../assets/loginsign-up-top-photo.png';
-import {Grid, Typography} from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import ReactStrappForm from '../../components/ReactStrapForm';
-import {width} from '@material-ui/system';
+import { width } from '@material-ui/system';
 import TextOnImage from '../../components/TextOnImage';
 import imageBackgroundTop from '../../assets/bg-frontpage-top.png';
 import imageMan from '../../assets/bg-man-owner.png';
@@ -19,7 +19,7 @@ import './style.css';
 import Tabs from '../../components/Tabs'
 
 import Button from '@material-ui/core/Button';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 
 import NavigationIcon from '@material-ui/icons/Navigation';
@@ -48,7 +48,7 @@ class LoginPage extends React.Component {
         this.handleImageClick = this.handleImageClick.bind(this);
         this.handleZoomScaleChange = this.handleZoomScaleChange.bind(this);
         // reset login status
-        // this.props.logout();
+        props.logout();
 
         this.state = {
             username: '',
@@ -63,7 +63,7 @@ class LoginPage extends React.Component {
     }
 
     handleImageClick() {
-        this.setState({underlineHeader: !this.state.underlineHeader});
+        this.setState({ underlineHeader: !this.state.underlineHeader });
     }
 
     handleZoomScaleChange(event) {
@@ -73,15 +73,15 @@ class LoginPage extends React.Component {
     }
 
     handleChange(e) {
-        const {name, value} = e.target;
-        this.setState({[name]: value});
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
     }
 
     handleSubmit(e) {
         e.preventDefault();
 
-        this.setState({submitted: true});
-        const {username, password} = this.state;
+        this.setState({ submitted: true });
+        const { username, password } = this.state;
         if (username && password) {
             this.props.login(username, password);
         }
@@ -94,83 +94,10 @@ class LoginPage extends React.Component {
     render() {
 
 
-        const {loggingIn, error} = this.props;
-        const {username, password, submitted} = this.state;
+        const { loggingIn, error } = this.props;
+        const { username, password, submitted } = this.state;
         return (
-            <div style={{flexGrow: '1', position: "relative"}}>
-                {/*hero section*/}
-
-
-                <Grid container>
-                    <Grid item lg={12} md={12} sm={12} xs={12}>
-                        <TextOnImage
-                            position="top"
-                            image={imageBackgroundTop}
-                            text={
-                                <Typography style={{
-                                    position: 'absolute',
-                                    width: '70%',
-                                    padding: '50px 15px 0px',
-                                    top: '0',
-                                }}>
-                                    <h4>High-Privacy</h4>
-                                    <h4 style={{color: "grey"}}>Real-time Notification</h4>
-                                </Typography>
-                            }/>
-                    </Grid>
-                    <Grid container>
-
-                        <Grid item xs={4}>
-                            <img src={imageMan} style={{
-                                height: '20vh',
-                                width: 'auto',
-                                position: 'relative',
-                                padding: '10px'
-                                // top: '-30%',
-                                // left: '100%',
-                            }}/>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <img src={imageCar} style={{
-                                height: '13vh',
-                                width: 'auto',
-                                // position: 'absolute',
-                                right: '0%',
-                                // top: '20%',
-                            }}/>
-
-                        </Grid>
-                        <Grid item xs={4}>
-                            <img src={imageReporter} style={{
-                                height: '15vh',
-                                width: 'auto',
-                                // position: 'absolute',
-                                // top: '20%',
-                                // right: '8%',
-                            }}/>
-                        </Grid>
-                    </Grid>
-                    <Grid container>
-
-                        <Grid item xs={12}>
-                            <Tabs>
-                                {/* show repoter / car's owner data*/}
-                            </Tabs>
-                        </Grid>
-                    </Grid>
-                </Grid>
-
-                <Grid container justify="center" alignItems="flex-start">
-                    <Button
-                        size="large"
-                        variant="contained"
-                        color="primary"
-                        startIcon={<Icon className="arrow_front">send</Icon>}
-                    >
-                        Request it
-                    </Button>
-                </Grid>
-
+            <div style={{ flexGrow: '1', position: "relative" }}>
 
                 <Grid container width="100vh" direction="column">
                     <Grid item alignContent='center'>
@@ -179,44 +106,44 @@ class LoginPage extends React.Component {
                                 <TextOnImage
                                     position="bottom"
                                     image={logo}
-                                    text={<Typography style={{backgroundColor: "rgba(255, 255, 255, 0.65)"}}>
+                                    text={<Typography style={{ backgroundColor: "rgba(255, 255, 255, 0.65)" }}>
                                         <h4>High-Privacy</h4>
-                                        <h4 style={{color: "grey"}}>Real-time Notification</h4>
-                                    </Typography>}/>
+                                        <h4 style={{ color: "grey" }}>Real-time Notification</h4>
+                                    </Typography>} />
                             </Grid>
                             <Grid item lg={12} md={12} sm={12} xs={12}>
-                                <div style={{marginLeft: "10vh", marginRight: "10vh"}}>
+                                <div style={{ marginLeft: "10vh", marginRight: "10vh" }}>
                                     <form name="form" onSubmit={this.handleSubmit}>
 
 
                                         <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
                                             <label htmlFor="username">Username</label>
                                             <input type="text" className="form-control" name="username" value={username}
-                                                   onChange={this.handleChange}/>
+                                                onChange={this.handleChange} />
                                             {submitted && !username &&
-                                            <div className="help-block">Username is required</div>
+                                                <div className="help-block">Username is required</div>
                                             }
                                         </div>
                                         <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
                                             <label htmlFor="password">Password</label>
                                             <input type="password" className="form-control" name="password"
-                                                   value={password} onChange={this.handleChange}/>
+                                                value={password} onChange={this.handleChange} />
                                             {submitted && !password &&
-                                            <div className="help-block">Password is required</div>
+                                                <div className="help-block">Password is required</div>
                                             }
                                         </div>
                                         <div className="form-group">
-                                            <button className="btn btn-primary" style={{width: "100%"}}>Login</button>
+                                            <button className="btn btn-primary" style={{ width: "100%" }}>Login</button>
                                             {loggingIn &&
-                                            <img
-                                                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                                                <img
+                                                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                                             }
                                         </div>
-                                        <div style={{fontSize: "2vh"}}>
-                                            <div style={{display: "inline", color: "grey"}}>Don’t have a QR sticker?
+                                        <div style={{ fontSize: "2vh" }}>
+                                            <div style={{ display: "inline", color: "grey" }}>Don’t have a QR sticker?
                                             </div>
-                                            <a style={{display: "inline"}}
-                                               onClick={() => this.goToRegisterPage()}> Request now</a>
+                                            <a style={{ display: "inline" }}
+                                                onClick={() => this.goToRegisterPage()}> Request now</a>
                                         </div>
                                     </form>
                                 </div>
@@ -226,17 +153,6 @@ class LoginPage extends React.Component {
                         </Grid>
                     </Grid>
                 </Grid>
-                {/*form end*/}
-                <div style={{
-                    bottom: '5%',
-                    position: 'fixed',
-                    right: '5%',
-                }}>
-                    <i className="material-icons arrow_down" style={{fontSize: '50px'}}>
-                        keyboard_arrow_down
-                    </i>
-                </div>
-
 
             </div>
 
@@ -245,8 +161,7 @@ class LoginPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const {loggingIn} = state.authentication;
-    const {error} = state.user;
+    const { loggingIn, error } = state.user;
     return {
         loggingIn, error
     };
@@ -256,7 +171,7 @@ const connectedLoginPage = connect(
     mapStateToProps,
     dispatch => bindActionCreators(actionCreators, dispatch)
 )(LoginPage);
-export {connectedLoginPage as LoginPage};
+export { connectedLoginPage as LoginPage };
 
 
 {/*<img src={imageBackground} alt="Smiley face" style={{*/
