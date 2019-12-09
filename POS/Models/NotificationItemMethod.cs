@@ -13,11 +13,9 @@ namespace POS.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int NotificationItemMethodId { get; set; }
-        public int? MethodTypeId { get; set; }
-        public MethodType MethodType { get; set; }
-
+        public string Method { get; set; }
+        public string Value { get; set; }
         public int? NotificationItemId { get; set; }
-
         public NotificationItem NotificationItem { get; set; }
     }
 }

@@ -9,6 +9,8 @@ namespace POS.Helpers
     {
         public AppSettings AppSettings { get; set; }
         public ConnectionString ConnectionString { get; set;  }
+
+        public Twilio Twilio { get; set; }
     }
 
     public class AppSettings
@@ -19,5 +21,12 @@ namespace POS.Helpers
     public class ConnectionString
     {
         public string DefaultConnection { get; set; }
+    }
+
+    public class Twilio
+    {
+        public string AccountSid { get; set; }
+        public string AuthToken { get; set; }
+        public string From { get; set; }
     }
 }

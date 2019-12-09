@@ -15,8 +15,8 @@ namespace POS.Models
         public int MessageId { get; set; }
         public string Content { get; set; }
         public string Sender { get; set; }
-        public int? NotificationMethodId { get; set; }
-        public NotificationItemMethod NotificationMethod { get; set; }
+        public string Method { get; set; }
+        public string Value { get; set; }
         public int? NotificationItemId { get; set; }
         public NotificationItem NotificationItem { get; set; }
         public DateTime CreatedDate { get; set; }

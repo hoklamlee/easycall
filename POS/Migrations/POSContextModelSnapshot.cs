@@ -91,17 +91,17 @@ namespace POS.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
+                    b.Property<string>("Method");
+
                     b.Property<int?>("NotificationItemId");
 
-                    b.Property<int?>("NotificationMethodId");
-
                     b.Property<string>("Sender");
+
+                    b.Property<string>("Value");
 
                     b.HasKey("MessageId");
 
                     b.HasIndex("NotificationItemId");
-
-                    b.HasIndex("NotificationMethodId");
 
                     b.ToTable("Messages");
                 });
@@ -142,7 +142,7 @@ namespace POS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CreatedByUserId");
+                    b.Property<int?>("CreatedById");
 
                     b.Property<DateTime>("CreatedDate");
 
@@ -154,9 +154,20 @@ namespace POS.Migrations
 
                     b.HasKey("NotificationItemId");
 
-                    b.HasIndex("CreatedByUserId");
+                    b.HasIndex("CreatedById");
 
                     b.ToTable("NotificationItems");
+
+                    b.HasData(
+                        new
+                        {
+                            NotificationItemId = 1,
+                            CreatedById = 1,
+                            CreatedDate = new DateTime(2019, 12, 9, 11, 46, 56, 968, DateTimeKind.Local).AddTicks(7149),
+                            ModifiedDate = new DateTime(2019, 12, 9, 11, 46, 56, 969, DateTimeKind.Local).AddTicks(4027),
+                            Name = "CV1202",
+                            PageContent = ""
+                        });
                 });
 
             modelBuilder.Entity("POS.Models.NotificationItemMethod", b =>
@@ -165,17 +176,23 @@ namespace POS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("MethodTypeId");
+                    b.Property<string>("Method");
 
                     b.Property<int?>("NotificationItemId");
 
-                    b.HasKey("NotificationItemMethodId");
+                    b.Property<string>("Value");
 
-                    b.HasIndex("MethodTypeId");
+                    b.HasKey("NotificationItemMethodId");
 
                     b.HasIndex("NotificationItemId");
 
                     b.ToTable("NotificationItemMethods");
+
+                    b.HasData(
+                        new
+                        {
+                            NotificationItemMethodId = 1
+                        });
                 });
 
             modelBuilder.Entity("POS.Models.Order", b =>
@@ -408,6 +425,19 @@ namespace POS.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Active = false,
+                            DisplayName = "test",
+                            Email = "test",
+                            FirstName = "test",
+                            LastName = "test",
+                            Password = "test",
+                            Username = "test"
+                        });
                 });
 
             modelBuilder.Entity("POS.Models.FavouriteOrder", b =>
@@ -418,7 +448,7 @@ namespace POS.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("POS.Models.User", "User")
-                        .WithMany("FavouriteOrders")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -439,25 +469,17 @@ namespace POS.Migrations
                     b.HasOne("POS.Models.NotificationItem", "NotificationItem")
                         .WithMany("Messages")
                         .HasForeignKey("NotificationItemId");
-
-                    b.HasOne("POS.Models.NotificationItemMethod", "NotificationMethod")
-                        .WithMany()
-                        .HasForeignKey("NotificationMethodId");
                 });
 
             modelBuilder.Entity("POS.Models.NotificationItem", b =>
                 {
                     b.HasOne("POS.Models.User", "CreatedBy")
                         .WithMany("NotificationItems")
-                        .HasForeignKey("CreatedByUserId");
+                        .HasForeignKey("CreatedById");
                 });
 
             modelBuilder.Entity("POS.Models.NotificationItemMethod", b =>
                 {
-                    b.HasOne("POS.Models.MethodType", "MethodType")
-                        .WithMany()
-                        .HasForeignKey("MethodTypeId");
-
                     b.HasOne("POS.Models.NotificationItem", "NotificationItem")
                         .WithMany("NotificationItemMethods")
                         .HasForeignKey("NotificationItemId");

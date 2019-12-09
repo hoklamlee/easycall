@@ -14,6 +14,7 @@ using POS.Models.Repository;
 using POS.Services;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using EasyCall.Services;
 
 namespace POS
 {
