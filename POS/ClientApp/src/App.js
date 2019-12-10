@@ -58,6 +58,7 @@ import { EditSystemParamPage } from './containers/SystemParamPage/EditSystemPara
 
 import { SiteSettingMain } from './containers/SiteSettingPage/SiteSettingMain';
 
+import { Index as InformerPage } from './containers/InformerPage';
 
 import 'antd/dist/antd.css';
 
@@ -100,6 +101,7 @@ class App extends React.Component {
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
                         <PrivateRoute path='/counter' component={Counter} />
+                        <Route path='/informer' component={InformerPage}></Route>
 
                         <PrivateRoute path='/createnotificationitem' component={CreateNotificationItemPage} />
                         <PrivateRoute path='/editnotificationitem/:id' component={EditNotificationItemPage} />
