@@ -11,7 +11,7 @@ import { actionCreators } from '../../store/Order';
 import config from 'react-global-configuration';
 
 import MaterialTable from 'material-table';
-import { Paper, Grid, Button, TextField } from '@material-ui/core';
+import { Paper, Grid, Button, TextField, FormControl, FormLabel, FormControlLabel, Checkbox } from '@material-ui/core';
 import RightBottomButton from '../../components/RightBottomButton';
 import MaterialUIButton from '../../components/MaterialUIButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,7 +28,12 @@ class CreateNotificationItemPage extends React.Component {
         this.state = {
             page: 0,
             itemType: "",
-            pictures: []
+            itemName: "",
+            description:"",
+            pictures: [],
+            gilad: true,
+            jason: false,
+            antoine: false,
         }
         this.onDrop = this.onDrop.bind(this);
     }
@@ -49,6 +54,18 @@ class CreateNotificationItemPage extends React.Component {
         this.setState({ itemType: value });
         this.nextPage();
     }
+
+    setItemName(event) {
+        this.setState({ itemName: event.target.value });
+    }
+
+    setDescription(event) {
+        this.setState({ description: event.target.value });
+    }
+
+    handleChange(name, event) {
+        this.setState({ [name]: event.target.checked });
+    };
 
     showPage() {
         switch (this.state.page) {
@@ -91,7 +108,7 @@ class CreateNotificationItemPage extends React.Component {
     
                         </Grid>
                             <Grid item spacing={1}>
-                                <TextField id="standard-basic" label="" />
+                                <TextField onChange={(value)=>this.setItemName(value)} id="standard-basic" label="" />
 
                             </Grid>
 
@@ -122,6 +139,121 @@ class CreateNotificationItemPage extends React.Component {
                                     maxFileSize={5242880}
                                     withPreview={true}
                                 />
+                            </Grid>
+
+                        </Grid>
+
+                    </React.Fragment>
+                )
+            case 3:
+                return (
+                    <React.Fragment>
+                        <Grid container justify="space-between" spacing={24} style={{ paddingLeft: "2vh", paddingRight: '2vh' }}>
+                            <Grid item>
+                                <Button onClick={() => this.previousPage()}>Back</Button>
+                            </Grid>
+                            <Grid item>
+                                <Button onClick={() => this.nextPage()}>Next</Button>
+                            </Grid>
+
+                        </Grid>
+                        <Grid container justify="center" alignContent="center" alignItems="center" direction="column" style={{ minHeight: '70vh' }} spacing={0}>
+                            <Grid item>Description of this item</Grid>
+                            <Grid item spacing={1}>
+                                <TextField onChange={(value) => this.setDescription(value)} id="standard-basic" label="" />
+
+                            </Grid>
+
+                        </Grid>
+
+                    </React.Fragment>
+                )
+            case 4:
+                return (
+                    <React.Fragment>
+                        <Grid container justify="space-between" spacing={24} style={{ paddingLeft: "2vh", paddingRight: '2vh' }}>
+                            <Grid item>
+                                <Button onClick={() => this.previousPage()}>Back</Button>
+                            </Grid>
+                            <Grid item>
+                                <Button onClick={() => this.nextPage()}>Next</Button>
+                            </Grid>
+
+                        </Grid>
+                        <Grid container justify="center" alignContent="center" alignItems="center" direction="column" style={{ minHeight: '70vh' }} spacing={0}>
+                            <Grid item>Notification Method</Grid>
+                            <Grid item spacing={1}>
+                                <FormControl component="fieldset" spacing={3}>
+                                    <FormLabel component="legend">Assign responsibility</FormLabel>
+                                    <FormGroup>
+                                        <FormControlLabel
+                                            control={<Checkbox checked={this.state.gilad} onChange={(e)=>this.handleChange('gilad',e)} value="gilad" />}
+                                            label="Gilad Gray"
+                                        />
+                                        <FormControlLabel
+                                            control={<Checkbox checked={this.state.jason} onChange={(e)=>this.handleChange('jason',e)} value="jason" />}
+                                            label="Jason Killian"
+                                        />
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox checked={this.state.antoine} onChange={(e)=>this.handleChange('antoine',e)} value="antoine" />
+                                            }
+                                            label="Antoine Llorca"
+                                        />
+                                    </FormGroup>
+                                    </FormControl>
+                            </Grid>
+
+                        </Grid>
+
+                    </React.Fragment>
+                )
+            case 5:
+                return (
+                    <React.Fragment>
+                        <Grid container justify="space-between" spacing={24} style={{ paddingLeft: "2vh", paddingRight: '2vh' }}>
+                            <Grid item>
+                                <Button onClick={() => this.previousPage()}>Back</Button>
+                            </Grid>
+                            <Grid item>
+                                <Button onClick={() => this.nextPage()}>Finish</Button>
+                            </Grid>
+
+                        </Grid>
+                        <Grid container justify="center" alignContent="center" alignItems="center" direction="column" style={{ minHeight: '70vh' }} spacing={0}>
+                            <Grid item>Preview</Grid>
+                            <Grid item spacing={1}>
+                                    {/*
+                                      <FormControl component="fieldset" spacing={3}>
+                                     <FormLabel component="legend">Assign responsibility</FormLabel>
+                                    <FormGroup>
+                                        <FormControlLabel
+                                            control={<Checkbox checked={this.state.gilad} onChange={(e) => this.handleChange('gilad', e)} value="gilad" />}
+                                            label="Gilad Gray"
+                                        />
+                                        <FormControlLabel
+                                            control={<Checkbox checked={this.state.jason} onChange={(e) => this.handleChange('jason', e)} value="jason" />}
+                                            label="Jason Killian"
+                                        />
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox checked={this.state.antoine} onChange={(e) => this.handleChange('antoine', e)} value="antoine" />
+                                            }
+                                            label="Antoine Llorca"
+                                        />
+                                    </FormGroup>
+                                    </FormControl>
+                                    */}
+                                    {this.state.itemType}
+                                    {this.state.itemName}
+                                    {this.state.description}
+                                {this.state.pictures}
+                                {this.state.gilad}                                     {this.state.gilad}
+                                {this.state.jason}
+                                {this.state.antoine}
+
+
+                                
                             </Grid>
 
                         </Grid>
