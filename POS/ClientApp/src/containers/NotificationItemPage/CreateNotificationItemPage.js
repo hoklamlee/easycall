@@ -7,7 +7,7 @@ import { Router, Route, Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { actionCreators } from '../../store/Order';
+import { actionCreators } from '../../store/NotificationItem';
 import config from 'react-global-configuration';
 
 import MaterialTable from 'material-table';
@@ -20,6 +20,7 @@ import { history } from '../../helpers/history';
 import MUICard from '../../components/MUICard';
 import MUIStepper from '../../components/MUIStepper';
 import ImageUploader from 'react-images-upload';
+import { WhatsApp } from '@material-ui/icons';
 
 class CreateNotificationItemPage extends React.Component {
     constructor(props) {
@@ -29,11 +30,11 @@ class CreateNotificationItemPage extends React.Component {
             page: 0,
             itemType: "",
             itemName: "",
-            description:"",
+            description: "",
             pictures: [],
-            gilad: true,
-            jason: false,
-            antoine: false,
+            Whatsapp: true,
+            SMS: false,
+            Phone: false,
         }
         this.onDrop = this.onDrop.bind(this);
     }
@@ -66,6 +67,48 @@ class CreateNotificationItemPage extends React.Component {
     handleChange(name, event) {
         this.setState({ [name]: event.target.checked });
     };
+
+    createItem() {
+        console.log(this.state.itemType);
+        console.log(this.state.itemName);
+        console.log(this.state.description);
+        console.log(this.state.pictures);
+        console.log(this.state.Whatsapp);
+        console.log(this.state.SMS);
+        console.log(this.state.Phone);
+
+        var notificationItemMedias = [];
+        this.state.pictures.map(f => {
+            notificationItemMedias.push({
+                type: "image",
+                content: f
+            })
+        })
+
+        var notificationItemMethods = [];
+
+        if (this.state.Whatsapp) {
+            notificationItemMethods.push({
+                method: "Whatsapp",
+                value: ""
+            })
+        }
+
+        if (this.state.SMS) {
+            notificationItemMethods.push({
+                method: "SMS",
+                value: ""
+            })
+        }
+
+        if (this.state.Phone) {
+            notificationItemMethods.push({
+                method: "Phone",
+                value: ""
+            })
+        }
+        this.props.addNotificationItem(this.state.itemName, this.state.itemType,this.state.description,notificationItemMedias, notificationItemMethods, this.props.currentUser)
+    }
 
     showPage() {
         switch (this.state.page) {
@@ -184,21 +227,21 @@ class CreateNotificationItemPage extends React.Component {
                             <Grid item>Notification Method</Grid>
                             <Grid item spacing={1}>
                                 <FormControl component="fieldset" spacing={3}>
-                                    <FormLabel component="legend">Assign responsibility</FormLabel>
+                                    {/*<FormLabel component="legend">Assign responsibility</FormLabel>*/}
                                     <FormGroup>
                                         <FormControlLabel
-                                            control={<Checkbox checked={this.state.gilad} onChange={(e)=>this.handleChange('gilad',e)} value="gilad" />}
-                                            label="Gilad Gray"
+                                            control={<Checkbox checked={this.state.Whatsapp} onChange={(e) => this.handleChange('Whatsapp', e)} value="Whatsapp" />}
+                                            label="Whatsapp"
                                         />
                                         <FormControlLabel
-                                            control={<Checkbox checked={this.state.jason} onChange={(e)=>this.handleChange('jason',e)} value="jason" />}
-                                            label="Jason Killian"
+                                            control={<Checkbox checked={this.state.SMS} onChange={(e) => this.handleChange('SMS', e)} value="SMS" />}
+                                            label="SMS"
                                         />
                                         <FormControlLabel
                                             control={
-                                                <Checkbox checked={this.state.antoine} onChange={(e)=>this.handleChange('antoine',e)} value="antoine" />
+                                                <Checkbox checked={this.state.Phone} onChange={(e) => this.handleChange('Phone', e)} value="Phone" />
                                             }
-                                            label="Antoine Llorca"
+                                            label="Phone"
                                         />
                                     </FormGroup>
                                     </FormControl>
@@ -216,7 +259,7 @@ class CreateNotificationItemPage extends React.Component {
                                 <Button onClick={() => this.previousPage()}>Back</Button>
                             </Grid>
                             <Grid item>
-                                <Button onClick={() => this.nextPage()}>Finish</Button>
+                                <Button onClick={() => this.createItem()}>Finish</Button>
                             </Grid>
 
                         </Grid>
@@ -247,10 +290,9 @@ class CreateNotificationItemPage extends React.Component {
                                     {this.state.itemType}
                                     {this.state.itemName}
                                     {this.state.description}
-                                {this.state.pictures}
-                                {this.state.gilad}                                     {this.state.gilad}
-                                {this.state.jason}
-                                {this.state.antoine}
+                                {this.state.Whatsapp}                             
+                                {this.state.SMS}
+                                {this.state.Phone}
 
 
                                 
@@ -287,9 +329,9 @@ class CreateNotificationItemPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { loading, error, items } = state.order;
+    const { loading, error, items, currentUser } = state.notificationItem;
     return {
-        loading, error, items
+        loading, error, items, currentUser
     };
 }
 
