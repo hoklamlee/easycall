@@ -9,7 +9,7 @@ export default function TextOnImageBottom(props) {
 
     return (
         <div className="image" style={props.style}>
-            <img height="100%" width="100%" src={props.image} alt="" />
+            <img height="70%" src={props.image} alt="" />
             <div className={position}>{props.text}</div>
         </div>
     )

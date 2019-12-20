@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from 'reactstrap';
+import {Container} from 'reactstrap';
 import NavMenu from './NavMenu';
 import './Layout.css';
 import config from 'react-global-configuration';
@@ -34,7 +34,7 @@ export default class Layout extends React.Component {
                         //backgroundImage: "url(" + "https://images.pexels.com/photos/3255761/pexels-photo-3255761.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" + ")",                 
                     }}
                 >
-                    <NavMenu />
+                    <NavMenu/>
                     <div fluid={isFullWidth}>
                         {
                             this.props.children
@@ -43,7 +43,7 @@ export default class Layout extends React.Component {
 
                 </div>
                 <div className="footer">
-                    <MUIBottomNavigation />
+                    <MUIBottomNavigation/>
                 </div>
             </div>
 

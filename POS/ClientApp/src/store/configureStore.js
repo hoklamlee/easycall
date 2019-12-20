@@ -12,6 +12,7 @@ import * as Status from './Status';
 import * as Order from './Order';
 import * as OrderItem from './OrderItem';
 import * as systemParam from './SystemParam';
+import * as NotificationItem from './NotificationItem';
 
 export default function configureStore(history, initialState) {
     const reducers = {
@@ -26,6 +27,7 @@ export default function configureStore(history, initialState) {
         order: Order.reducer,
         orderItem: OrderItem.reducer,
         systemParam: systemParam.reducer,
+        notificationItem: NotificationItem.reducer
     };
 
     const middleware = [

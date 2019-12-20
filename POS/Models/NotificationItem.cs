@@ -19,6 +19,8 @@ namespace POS.Models
         public ICollection<Message> Messages { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
+
+        public int? CreatedById { get; set; }
         public User CreatedBy { get; set; }
     }
 }

@@ -27,8 +27,10 @@ const DELETE_REQUEST = 'USERS_DELETE_REQUEST';
 const DELETE_SUCCESS = 'USERS_DELETE_SUCCESS';
 const DELETE_FAILURE = 'USERS_DELETE_FAILURE';
 
+let user = JSON.parse(localStorage.getItem('user'));
 
-const initialState = { loading: false, error: '', items: [], item : null};
+
+const initialState = { loading: false, error: '', items: [], item: null, loggedIn: user ? true : {}};
 
 export const actionCreators = {
     updatePassword: (userId,password,passwordConfirm) => async (dispatch, getState) => {
@@ -67,9 +69,8 @@ export const actionCreators = {
         );
     },
     logout: () => async (dispatch, getState) => {
-        dispatch({
-            type: LOGOUT
-        });
+
+        dispatch({type: LOGOUT});
         userService.logout();
     },
     login: (username, password) => async (dispatch, getState) => {
@@ -311,6 +312,15 @@ export const reducer = (state, action) => {
         return {
             ...state,
             loading: false,
+        }
+    }
+
+    if (action.type == LOGOUT) {
+        return {
+            ...state,
+            loggingIn: false,
+            loggedIn: false,
+
         }
     }
 

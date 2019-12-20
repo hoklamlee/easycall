@@ -11,6 +11,8 @@ import Layout from './components/Layout';
 import Home from './containers/Home';
 import Counter from './components/Counter';
 import FetchData from './components/FetchData';
+import { LandingPage } from './containers/LandingPage/LandingPage';
+
 import { LoginPage } from './containers/LoginPage';
 import { RegisterPage } from './containers/RegisterPage';
 import { ProfilePage } from './containers/ProfilePage/ProfilePage';
@@ -56,6 +58,7 @@ import { EditSystemParamPage } from './containers/SystemParamPage/EditSystemPara
 
 import { SiteSettingMain } from './containers/SiteSettingPage/SiteSettingMain';
 
+import { Index as InformerPage } from './containers/InformerPage';
 
 import 'antd/dist/antd.css';
 
@@ -94,9 +97,11 @@ class App extends React.Component {
                     <Layout>
                         {/*<PrivateRoute exact path="/" component={Home} />*/}
                         <PrivateRoute exact path="/" component={Home} />
+                        <Route path="/home" component={LandingPage} />
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
                         <PrivateRoute path='/counter' component={Counter} />
+                        <Route path='/informer' component={InformerPage}></Route>
 
                         <PrivateRoute path='/createnotificationitem' component={CreateNotificationItemPage} />
                         <PrivateRoute path='/editnotificationitem/:id' component={EditNotificationItemPage} />

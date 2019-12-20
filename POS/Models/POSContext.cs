@@ -42,24 +42,44 @@ namespace POS.Models
             //modelBuilder.Entity<Order>().HasOne(o => o.Status).WithMany().HasForeignKey(o=>o.StatusId);
             //modelBuilder.Entity<Order>().HasOne(o => o.Purchaser).WithMany().HasForeignKey(o => o.PurchaserId);
 
-            modelBuilder.Entity<Order>().HasMany(o => o.OrderItems).WithOne(o => o.Order).HasForeignKey(o=>o.OrderId);
+            //modelBuilder.Entity<Order>().HasMany(o => o.OrderItems).WithOne(o => o.Order).HasForeignKey(o=>o.OrderId);
 
-            modelBuilder.Entity<FavouriteOrder>().HasOne(o => o.User).WithMany(o => o.FavouriteOrders).HasForeignKey(o => o.UserId);
+            //modelBuilder.Entity<FavouriteOrder>().HasOne(o => o.User).WithMany(o => o.FavouriteOrders).HasForeignKey(o => o.UserId);
 
-            modelBuilder.Entity<Purchaser>().HasMany(o => o.Orders).WithOne(o => o.Purchaser).HasForeignKey(o => o.PurchaserId);
-
-
-
+            //modelBuilder.Entity<Purchaser>().HasMany(o => o.Orders).WithOne(o => o.Purchaser).HasForeignKey(o => o.PurchaserId);
 
 
             modelBuilder.Entity<NotificationItem>().HasMany(o => o.Messages).WithOne(o=>o.NotificationItem).HasForeignKey(o=>o.NotificationItemId);
             modelBuilder.Entity<NotificationItem>().HasMany(o => o.NotificationItemMethods).WithOne(o=>o.NotificationItem).HasForeignKey(o=>o.NotificationItemId);
+            modelBuilder.Entity<NotificationItem>().HasOne(o => o.CreatedBy).WithMany(o => o.NotificationItems).HasForeignKey(o => o.CreatedById);
 
+
+
+            modelBuilder.Entity<User>().HasData(new User() { UserId = 1, Username = "test",Password = "test", FirstName="test",LastName="test",Email = "test",DisplayName="test" ,Active=true});
 
 
             modelBuilder.Entity<MethodType>().HasData( new MethodType() { MethodTypeId = 1, Method = "SMS"});
             modelBuilder.Entity<MethodType>().HasData(new MethodType() { MethodTypeId = 2, Method = "Whatsapp" });
             modelBuilder.Entity<MethodType>().HasData(new MethodType() { MethodTypeId = 3, Method = "Phone" });
+
+            modelBuilder.Entity<NotificationItem>().HasData(new NotificationItem()
+            {
+                NotificationItemId = 1,
+                Name = "CV1202",
+                PageContent = "",
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now,
+                CreatedById = 1
+            });
+
+            modelBuilder.Entity<NotificationItemMethod>().HasData(new NotificationItemMethod()
+            {
+                NotificationItemMethodId = 1,
+                Method = "SMS",
+                Value = "64974312",
+                NotificationItemId = 1
+            });
+
 
             //modelBuilder.Entity<Order>().HasOne(o => o.DeliverBy).WithMany(o=>o.DeliverOrders).HasForeignKey(o => o.DeliverById); ;
 
