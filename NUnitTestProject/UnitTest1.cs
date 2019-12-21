@@ -38,8 +38,8 @@ namespace NUnitTestProject
             IOptions<POS.Helpers.Settings> someOptions = Options.Create<POS.Helpers.Settings>(options);
 
 
-            EasyCall.Services.TwilioService messageService = new EasyCall.Services.TwilioService(someOptions);
-            messageService.SendWhatsapp("+14155238886", "+85264974312", "test");
+            EasyCall.Services.TwilioService messageService = new EasyCall.Services.TwilioService(options);
+            messageService.SendWhatsapp("+85264974312", "test");
         }
     }
 }

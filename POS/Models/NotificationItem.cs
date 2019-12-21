@@ -14,7 +14,9 @@ namespace POS.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int NotificationItemId { get; set; }
         public string Name { get; set; }
+        public string Type { get; set; }
         public string PageContent { get; set; }
+        public ICollection<NotificationItemMedia> NotificationItemMedias { get; set; }
         public ICollection<NotificationItemMethod> NotificationItemMethods { get; set; }
         public ICollection<Message> Messages { get; set; }
         public DateTime CreatedDate { get; set; }

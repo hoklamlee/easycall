@@ -17,10 +17,11 @@ function addNotificationItem(name, type, pageContent, notificationItemMedias, no
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
-        body: JSON.stringify({ name,type, pageContent, notificationItemMedias, notificationItemMethods, createdBy_UserId })
+        body: JSON.stringify({ name, type, pageContent, notificationItemMethods, createdBy_UserId })
 
     };
 
+    console.log(requestOptions)
     var api = config.get('apiUrl');
 
 

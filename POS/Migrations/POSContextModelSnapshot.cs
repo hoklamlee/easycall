@@ -152,6 +152,8 @@ namespace POS.Migrations
 
                     b.Property<string>("PageContent");
 
+                    b.Property<string>("Type");
+
                     b.HasKey("NotificationItemId");
 
                     b.HasIndex("CreatedById");
@@ -163,11 +165,38 @@ namespace POS.Migrations
                         {
                             NotificationItemId = 1,
                             CreatedById = 1,
-                            CreatedDate = new DateTime(2019, 12, 9, 11, 46, 56, 968, DateTimeKind.Local).AddTicks(7149),
-                            ModifiedDate = new DateTime(2019, 12, 9, 11, 46, 56, 969, DateTimeKind.Local).AddTicks(4027),
+                            CreatedDate = new DateTime(2019, 12, 19, 23, 48, 54, 561, DateTimeKind.Local).AddTicks(2294),
+                            ModifiedDate = new DateTime(2019, 12, 19, 23, 48, 54, 561, DateTimeKind.Local).AddTicks(9560),
                             Name = "CV1202",
                             PageContent = ""
                         });
+                });
+
+            modelBuilder.Entity("POS.Models.NotificationItemMedia", b =>
+                {
+                    b.Property<int>("NotificationItemMediaId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte[]>("Content");
+
+                    b.Property<int?>("CreatedById");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<int?>("NotificationItemId");
+
+                    b.Property<string>("Type");
+
+                    b.HasKey("NotificationItemMediaId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("NotificationItemId");
+
+                    b.ToTable("NotificationItemMedias");
                 });
 
             modelBuilder.Entity("POS.Models.NotificationItemMethod", b =>
@@ -191,7 +220,10 @@ namespace POS.Migrations
                     b.HasData(
                         new
                         {
-                            NotificationItemMethodId = 1
+                            NotificationItemMethodId = 1,
+                            Method = "SMS",
+                            NotificationItemId = 1,
+                            Value = "64974312"
                         });
                 });
 
@@ -430,7 +462,7 @@ namespace POS.Migrations
                         new
                         {
                             UserId = 1,
-                            Active = false,
+                            Active = true,
                             DisplayName = "test",
                             Email = "test",
                             FirstName = "test",
@@ -476,6 +508,17 @@ namespace POS.Migrations
                     b.HasOne("POS.Models.User", "CreatedBy")
                         .WithMany("NotificationItems")
                         .HasForeignKey("CreatedById");
+                });
+
+            modelBuilder.Entity("POS.Models.NotificationItemMedia", b =>
+                {
+                    b.HasOne("POS.Models.User", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
+                    b.HasOne("POS.Models.NotificationItem", "NotificationItem")
+                        .WithMany("NotificationItemMedias")
+                        .HasForeignKey("NotificationItemId");
                 });
 
             modelBuilder.Entity("POS.Models.NotificationItemMethod", b =>

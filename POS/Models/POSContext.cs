@@ -28,6 +28,7 @@ namespace POS.Models
         public DbSet<NotificationItem> NotificationItems { get; set; }
 
         public DbSet<NotificationItemMethod> NotificationItemMethods { get; set; }
+        public DbSet<NotificationItemMedia> NotificationItemMedias { get; set; }
 
         public DbSet<Message> Messages { get; set; }
 
@@ -52,6 +53,7 @@ namespace POS.Models
             modelBuilder.Entity<NotificationItem>().HasMany(o => o.Messages).WithOne(o=>o.NotificationItem).HasForeignKey(o=>o.NotificationItemId);
             modelBuilder.Entity<NotificationItem>().HasMany(o => o.NotificationItemMethods).WithOne(o=>o.NotificationItem).HasForeignKey(o=>o.NotificationItemId);
             modelBuilder.Entity<NotificationItem>().HasOne(o => o.CreatedBy).WithMany(o => o.NotificationItems).HasForeignKey(o => o.CreatedById);
+            modelBuilder.Entity<NotificationItem>().HasMany(o => o.NotificationItemMedias).WithOne(o => o.NotificationItem).HasForeignKey(o => o.NotificationItemId);
 
 
 

@@ -15,6 +15,7 @@ using POS.Services;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using EasyCall.Services;
+using Newtonsoft.Json;
 
 namespace POS
 {
@@ -32,14 +33,23 @@ namespace POS
         {
             services.Configure<Settings>(Configuration);
 
-            services.AddMvc().AddJsonOptions(
-            options => {
+            #region .net core 2.2
+            //services.AddMvc().AddJsonOptions(
+            //options =>
+            //{
+            //    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            //    options.SerializerSettings.DateFormatString = "dd/MM/yyyy"; // month must be capital. otherwise it gives minutes.
+            //})
+            //    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            #endregion;
+
+            #region .net core 3.0
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.DateFormatString = "dd/MM/yyyy"; // month must be capital. otherwise it gives minutes.
-            })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0); ;
+            #endregion
 
             //###############Database setup##################
             services.AddDbContext<POSContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:DefaultConnection"]));
@@ -101,12 +111,14 @@ namespace POS
 
             app.UseAuthentication();
 
+            #region Extension: Swagger
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
+            #endregion
 
             if (env.IsDevelopment())
             {
@@ -120,16 +132,30 @@ namespace POS
             }
 
             app.UseHttpsRedirection();
+
+
+
+
+            #region .net core 2.2
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller}/{action=Index}/{id?}");
+            //});
+            #endregion
+
+            #region .net core 3.0
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
+            #endregion
+
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
-
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
