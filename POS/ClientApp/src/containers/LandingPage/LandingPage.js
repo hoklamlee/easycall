@@ -113,7 +113,6 @@ class LandingPage extends React.Component {
                 height: '100vh'
             }}>
                 {/*hero section*/}
-
                 <Grid container>
                     <Grid item lg={12} md={12} sm={12} xs={12} style={{height: '70vh'}}>
                         <Grid container direction="row" justify="center" alignItems="center" alignContent="center"
@@ -121,11 +120,8 @@ class LandingPage extends React.Component {
                             <Grid item>
                                 <h4>High-Privacy</h4>
                                 <h4 style={{color: "grey"}}>Real-time Notification</h4>
-
                             </Grid>
-
                         </Grid>
-
                     </Grid>
                     <Grid item lg={12} md={12} sm={12} xs={12} style={{height: '30vh'}}>
                         <Grid container>
@@ -146,7 +142,6 @@ class LandingPage extends React.Component {
                                     right: '0%',
                                     // top: '20%',
                                 }}/>
-
                             </Grid>
                             <Grid item lg={4} md={4} sm={4} xs={4}>
                                 <img src={imageReporter} style={{
@@ -161,11 +156,10 @@ class LandingPage extends React.Component {
                         </Grid>
                     </Grid>
                     <Grid item lg={12} md={12} sm={12} xs={12} style={{height: '70vh'}}>
-
-                        <Tabs>
-                            {/* show repoter / car's owner data*/}
-                        </Tabs>
+                        <Tabs>{/* show tabs component*/}</Tabs>
                     </Grid>
+
+                    {/*request it button*/}
                     <Grid item lg={12} md={12} sm={12} xs={12} style={{height: '30vh'}}>
                         <Grid container direction="column" justify="center" alignItems="center" alignContent="center">
                             <div>
@@ -197,12 +191,6 @@ class LandingPage extends React.Component {
 
                     </Grid>
                 </Grid>
-
-
-                {/*form end*/
-                }
-
-
             </div>
 
         );
@@ -220,4 +208,5 @@ const connectedLandingPage = connect(
     mapStateToProps,
     dispatch => bindActionCreators(actionCreators, dispatch)
 )(LandingPage);
+
 export {connectedLandingPage as LandingPage};

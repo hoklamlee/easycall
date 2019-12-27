@@ -12,10 +12,11 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+
+import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CarImage from '../../assets/list-page-audi-car@2x.png'
-
 
 
 export class Index extends React.Component {
@@ -30,11 +31,22 @@ export class Index extends React.Component {
     }
 
     render() {
-        const classes = makeStyles({
+        const classes = makeStyles(theme=>({
+            root: {
+                flexGrow: 1,
+            },
+            paper: {
+                height: 140,
+                width: 100,
+            },
+            control: {
+                padding: theme.spacing(2),
+            },
             card: {
                 maxWidth: 345,
             },
-        });
+
+        }));
         const cards = [
             {
                 title: 'EC1688',
@@ -61,22 +73,30 @@ export class Index extends React.Component {
                                     />
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            Lizard
+                                            EC1688
                                         </Typography>
                                         <Typography variant="body2" color="textSecondary" component="p">
-                                            Lizards are a widespread group of squamate reptiles, with over 6,000
-                                            species, ranging
-                                            across all continents except Antarctica
+                                            Please select one of the way to push notification
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>
                                 <CardActions>
-                                    <Button size="small" color="primary">
-                                        Share
-                                    </Button>
-                                    <Button size="small" color="primary">
-                                        Learn More
-                                    </Button>
+
+                                     <Grid container className={classes.root} spacing={2} justify="space-evenly" alignItems="center">
+                                         <Grid key="1" item>
+                                             <img src="https://img.icons8.com/carbon-copy/80/000000/whatsapp.png"/>
+                                             <Paper className={classes.paper} />
+                                         </Grid>
+                                         <Grid key="2" item>
+                                             <img src="https://img.icons8.com/android/60/000000/sms.png"/>
+                                             <Paper className={classes.paper} />
+                                         </Grid>
+                                         <Grid key="3" item>
+                                             <img src="https://img.icons8.com/dotty/60/000000/outgoing-call.png"/>
+                                             <Paper className={classes.paper} />
+                                         </Grid>
+                                     </Grid>
+
                                 </CardActions>
                             </Card>
 

@@ -10,8 +10,14 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
+import Button from '@material-ui/core/Button';
+import QrReader from 'react-qr-reader'
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import {actionCreators} from "../store/User";
 
 function TabPanel(props) {
+
     const { children, value, index, ...other } = props;
 
     return (
@@ -42,7 +48,15 @@ function a11yProps(index) {
 }
 
 
-export default function CenteredTabs(props) {
+const CenteredTabs=(props) =>{
+    const handleScan = data => {
+        if (data) {
+        console.log(data)
+        }
+    }
+    const handleError = err => {
+        console.error(err)
+    }
     const theme = useTheme();
     const useStyles = makeStyles({
         root: {
@@ -54,8 +68,19 @@ export default function CenteredTabs(props) {
     });
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
+    const [qr, setQr] = React.useState(false);
+    function showQrReader(){
+        return (
+            <QrReader
+                delay={200}
+                onError={handleError}
+                onScan={handleScan}
+                style={{ width: '100%' }}
 
+            />
+        )
 
+    }
     const handleChangeIndex = index => {
         setValue(index);
     };
@@ -87,6 +112,15 @@ export default function CenteredTabs(props) {
                    {/*  <ReactStepper>
                      data for reporter 
                     </ReactStepper> */}
+                    <Button variant="contained" color="primary" onClick={()=>setQr(true)} >
+                        Scan
+                    </Button>
+                    <div>
+                        { qr ? showQrReader() : null }
+                    </div>
+
+                        <p>{}</p>
+
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
                     {/*  <ReactStepper>
@@ -97,3 +131,14 @@ export default function CenteredTabs(props) {
         </div>
     );
 }
+
+
+
+
+function mapStateToProps(state) {
+    return {
+        showQR:false
+    }
+}
+
+export default connect(mapStateToProps)(CenteredTabs);
